@@ -1,7 +1,5 @@
 /// Solution 1: Runtime 28 ms - 70.81%
 /// memory - 14.9MB, lessthan 8.09%
-
-// TODO: 
 /// Solution 1 takes extra space, time complexity - o(n)
     
     func isPalindrome(_ s: String) -> Bool {
@@ -11,8 +9,39 @@
         let reversed = result.reversed()
         return result == String(reversed)
    }
-   
-   
+
+/// Solution 2
+/// 16 ms, faster than 96.59% of Swift online submissions for Valid Palindrome.
+/// Memory Usage: 15 MB, less than 7.67% of Swift online submissions for Valid Palindrome.
+/// Time complexity - 0(n), Space Complexity - o(1) no extra memory is needed
+
+    func isPalindrome(_ s: String) -> Bool {
+        guard s.count > 1 else { return true }
+        
+        var left = s.startIndex
+        var right = s.index(before: s.endIndex)
+        
+        while left < right {
+            if !(s[left].isLetter || s[left].isNumber) {
+                left = s.index(after: left)
+                continue
+            }
+            
+            if !(s[right].isLetter || s[right].isNumber) {
+                right = s.index(before: right)
+                continue
+            }
+            
+            if s[left].lowercased() != s[right].lowercased() {
+                return false
+            }
+            
+            left = s.index(after: left)
+            right = s.index(before: right)
+        }
+        
+        return true
+    }
    
    /// `inputs`
    /// 1. support alphabets,  numbers and ignore rest
