@@ -11,17 +11,20 @@
 class Solution {
     func deleteDuplicates(_ head: ListNode?) -> ListNode? {
         guard let head = head else { return nil }
-        var node: ListNode? = head
+        head.next = deleteDuplicates(head.next)
+        return head.val == head.next?.val ? head.next : head
         
-        while let next = node?.next {
-            if node?.val == next.val {
-                node?.next = next.next
-                continue
-            }
+//         var node: ListNode? = head
+        
+//         while let next = node?.next {
+//             if node?.val == next.val {
+//                 node?.next = next.next
+//                 continue
+//             }
             
-            node = next
-        }
+//             node = next
+//         }
         
-        return head
+//         return head
     }
 }
