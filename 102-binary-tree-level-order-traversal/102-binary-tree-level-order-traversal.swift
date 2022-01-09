@@ -22,22 +22,19 @@ class Solution {
         while !queue.isEmpty {
             var array: [Int] = []
             var count = queue.count - 1
+            defer { results.append(array) }
             
             while count >= 0 {
+                defer { count -= 1 }
+                
                 let pop = queue.remove(at: 0)
-                count -= 1
                 array.append(pop.val)
                 
-                if let left = pop.left {
-                    queue.append(left)
-                }  
-            
-                if let right = pop.right {
-                    queue.append(right)
-                }
+                if let left = pop.left { queue.append(left) }  
+                if let right = pop.right { queue.append(right) }
             }
             
-            results.append(array)
+            // results.append(array)
         }
         
         return results
