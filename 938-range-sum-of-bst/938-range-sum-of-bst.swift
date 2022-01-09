@@ -14,8 +14,8 @@
  * }
  */
 class Solution {
-    func rangeSumBST(_ root: TreeNode?, _ low: Int, _ high: Int, _ path: Int = 0) -> Int {
-        guard let root = root else { return path }
+    func rangeSumBST(_ root: TreeNode?, _ low: Int, _ high: Int) -> Int {
+        guard let root = root else { return 0 }
         var path = 0, stack = [root]
         
         while !stack.isEmpty { 
