@@ -33,8 +33,6 @@ class Solution {
                 if let left = pop.left { queue.append(left) }  
                 if let right = pop.right { queue.append(right) }
             }
-            
-            // results.append(array)
         }
         
         return results
