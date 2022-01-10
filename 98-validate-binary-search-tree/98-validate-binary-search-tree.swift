@@ -14,9 +14,28 @@
  * }
  */
 class Solution {
-    func isValidBST(_ root: TreeNode?, _ max: Int = Int.max, _ min: Int = Int.min) -> Bool {
+    // func isValidBST(_ root: TreeNode?, _ max: Int = Int.max, _ min: Int = Int.min) -> Bool {
+    //     guard let root = root else { return true }
+    //     if root.val <= min || root.val >= max { return false }
+    //     return isValidBST(root.left, root.val, min) && isValidBST(root.right, max, root.val)
+    // }
+    
+    func isValidBST(_ root: TreeNode?) -> Bool {
         guard let root = root else { return true }
-        if root.val <= min || root.val >= max { return false }
-        return isValidBST(root.left, root.val, min) && isValidBST(root.right, max, root.val)
+        var stack: [TreeNode] = [], cur: TreeNode? = root, prev: TreeNode? 
+        
+        while !stack.isEmpty || cur != nil {
+            while let curNode = cur {
+                stack.append(curNode)
+                cur = curNode.left
+            }
+            
+            cur = stack.popLast() 
+            if let prev = prev, let cur = cur, prev.val >= cur.val { return false }
+            prev = cur
+            cur = cur?.right 
+        }
+        
+        return true
     }
 }
