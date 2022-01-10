@@ -24,7 +24,6 @@ class Solution {
             }
         }
         
-        print(results)
         return results
     }
 }
