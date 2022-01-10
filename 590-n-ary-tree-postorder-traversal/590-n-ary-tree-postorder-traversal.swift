@@ -29,10 +29,7 @@ class Solution {
         
         while !stack.isEmpty {
             guard let pop = stack.popLast() else { return [] }
-            for child in pop.children { 
-                stack.append(child)
-            }
-            
+            pop.children.forEach { stack.append($0) }
             results.append(pop.val)
         }
         
