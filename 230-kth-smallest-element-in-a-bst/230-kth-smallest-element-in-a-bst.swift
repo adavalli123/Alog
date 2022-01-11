@@ -34,7 +34,6 @@ class Solution {
             }
             
             guard let pop = stack.popLast() else { return 0 }
-            // print(pop.val)
             if k == 1 { return pop.val }
             k -= 1
             cur = pop.right
