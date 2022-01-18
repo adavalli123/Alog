@@ -1,7 +1,7 @@
 class Solution {
     func maxProduct(_ nums: [Int]) -> Int {
         var nums = nums
-        quicksortDutchFlag(&nums, 0, nums.count-1)
+        quicksortDutchFlag(&nums, 0, nums.count-1, 2)
         return (nums[nums.count-1] - 1) * (nums[nums.count-2] - 1)
     }
     
@@ -57,12 +57,12 @@ func partitionDutchFlag<T: Comparable>(_ a: inout [T], low: Int, high: Int, pivo
 /*
   Uses Dutch national flag partitioning and a random pivot index.
 */
-func quicksortDutchFlag<T: Comparable>(_ a: inout [T], _ low: Int, _ high: Int) {
-  if low < high {
-    let pivotIndex = low + (high - low)/2
-    let (p, q) = partitionDutchFlag(&a, low: low, high: high, pivotIndex: pivotIndex)
-    quicksortDutchFlag(&a, low, p - 1)
-    quicksortDutchFlag(&a, q + 1, high)
-  }
-}
+    func quicksortDutchFlag<T: Comparable>(_ a: inout [T], _ low: Int, _ high: Int, _ k: Int) {
+        if low < high {
+            let pivotIndex = low + (high - low)/2
+            let (p, q) = partitionDutchFlag(&a, low: low, high: high, pivotIndex: pivotIndex)
+            quicksortDutchFlag(&a, low, p - 1, k-1)
+            quicksortDutchFlag(&a, q + 1, high, k-1)
+        }
+    }
 }
