@@ -11,9 +11,7 @@ class Solution {
         }
         
         let topKFreq = nums.map { $0.0 }
-        print(topKFreq[0 ..< k])
         return Array(topKFreq[0 ..< k])
-        // return []
     }
     
     func buildHeap(_ A: inout [(Int, Int)]) {
