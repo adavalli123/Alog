@@ -1,13 +1,18 @@
 class Solution {
     func sortColors(_ nums: inout [Int]) {
-        var red = 0, white = 0, blue = 0
+        var red = 0, white = 0, blue = nums.count - 1
         
-        for num in nums {
-            if num == 0 { red += 1 }
-            else if num == 1 { white += 1 }
-            else { blue += 1 }
+        while white <= blue {
+            if nums[white] == 0 {
+                (nums[red], nums[white]) = (nums[white], nums[red])
+                red += 1
+                white += 1
+            } else if nums[white] == 1 {
+                white += 1
+            } else {
+                (nums[white], nums[blue]) = (nums[blue], nums[white])
+                blue -= 1
+            }
         }
-        
-        nums = Array(repeating: 0, count: red) + Array(repeating: 1, count: white) + Array(repeating: 2, count: blue)
     }
 }
