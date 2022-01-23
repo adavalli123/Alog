@@ -1,44 +1,42 @@
 class Solution {
     func findKthLargest(_ nums: [Int], _ k: Int) -> Int {
         var nums = nums
-        let value = select(&nums, 0, nums.count - 1, nums.count - k)
+        let value = heap(&nums, 0, nums.count - 1)
         // print(nums)
-        return value
+        return nums[k-1]
     }
     
-    func select(_ nums: inout [Int], _ l: Int, _ r: Int, _ k: Int) -> Int {
-        guard l < r else { return nums[l] }
-        let index = partition(&nums, l, r)
-        guard k != index else { return nums[index] }
-        if k < index { return select(&nums, l, index-1, k) }
-        return select(&nums, index + 1, r, k)
-    }
-    
-    /*# This function returns k'th smallest element
-    # in arr[l..r] using QuickSort based method.
-    # ASSUMPTION: ALL ELEMENTS IN ARR[] ARE DISTINCT */
-    func pivot(_ nums: inout [Int], _ l: Int, _ r: Int) -> Int {
-        let index = Int.random(in: l ... r)
-        let value = nums[index]
-        nums.swapAt(index, r)
-        return value
-    }
-    
-    /* Standard partition process of QuickSort().
-    # It considers the last element as pivot and
-    # moves all smaller element to left of it
-    # and greater elements to right */
-    func partition(_ nums: inout [Int], _ l: Int, _ r: Int) -> Int {
-        var index = l, p = pivot(&nums, l, r)
+    func heap(_ A: inout [Int], _ index: Int, _ size: Int) {
+        buildHeap(&A)
         
-        for j in l ..< r {
-            if nums[j] <= p {
-                nums.swapAt(index, j)
-                index += 1
-            }
+        for i in stride(from: A.count - 1, through: 0, by: -1) {
+            A.swapAt(0, i)
+            downHeapify(&A, 0, i)
+        }
+    }
+    
+    func buildHeap(_ A: inout [Int]) {
+        for i in stride(from: A.count/2 - 1, through: 0, by: -1) {
+            downHeapify(&A, i, A.count)
+        }
+    }
+    
+    func downHeapify(_ A: inout [Int], _ index: Int, _ size: Int) {
+        var largest = index
+        var left = (2 * index) + 1
+        var right = (2 * index) + 2
+        
+        if left < size, A[left] < A[largest] {
+            largest = left
         }
         
-        nums.swapAt(index, r)
-        return index
+        if right < size, A[right] < A[largest] {
+            largest = right
+        }
+        
+        if largest != index {
+            (A[index], A[largest]) = (A[largest], A[index])
+            downHeapify(&A, largest, size)
+        }
     }
 }
