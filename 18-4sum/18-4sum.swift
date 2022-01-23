@@ -1,7 +1,7 @@
 class Solution {
+    
     func fourSum(_ nums: [Int], _ target: Int) -> [[Int]] {
         guard nums.count > 3 else { return [] }
-        var dict: [Int: Int] = [:]
         var nums = nums
         var result: [[Int]] = []
         
