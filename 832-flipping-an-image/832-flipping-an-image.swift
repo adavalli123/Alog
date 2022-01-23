@@ -22,12 +22,14 @@ class Solution {
     }
     
     func reverse(_ row: inout [Int]) {
-        for i in 0 ..< row.count/2 {
-            row.swapAt(i, row.count - 1 - i)
-        }
-        // row = row.reversed()
+        var left = 0, right = row.count - 1
+        while left < right { 
+            row.swapAt(left, right)
+            left += 1
+            right -= 1
+        } 
         
-        // print(row)
+        print(row)
     }
     
     func inverse(_ row: inout [Int]) {
