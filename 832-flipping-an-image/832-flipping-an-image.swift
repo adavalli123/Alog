@@ -22,10 +22,10 @@ class Solution {
     }
     
     func reverse(_ row: inout [Int]) {
-        // for i in 0 ... row.count/2 {
-        //     row.swapAt(i, row.count - 1 - i)
-        // }
-        row = row.reversed()
+        for i in 0 ..< row.count/2 {
+            row.swapAt(i, row.count - 1 - i)
+        }
+        // row = row.reversed()
         
         // print(row)
     }
