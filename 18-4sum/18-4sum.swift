@@ -19,9 +19,7 @@ class Solution {
                                 nums.count - 1
                                 )
                 if t.o {
-                    for v in t.0 {
-                        result.append((output + v).sorted())
-                    }
+                        result += t.0
                 }
             }
         }
@@ -29,7 +27,7 @@ class Solution {
         return Array(Set(result))
     }
     
-    func twoSum(_ nums: [Int], _ result: [Int], _ k: Int, _ s: Int, _ e: Int) -> ([[Int]], o: Bool) {
+    func twoSum(_ nums: [Int], _ r: [Int], _ k: Int, _ s: Int, _ e: Int) -> ([[Int]], o: Bool) {
         var output = false
         var result: [[Int]] = []
         var dict: [Int: Int] = [:]
@@ -40,7 +38,7 @@ class Solution {
         
         for i in s ... e {
             if let val = dict[nums[i]], val != i {
-                result.append([k - nums[i], nums[i]])
+                result.append((r + [k - nums[i], nums[i]]).sorted())
                 output = true
             }
         }
