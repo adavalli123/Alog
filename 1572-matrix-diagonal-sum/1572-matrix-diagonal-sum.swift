@@ -3,11 +3,10 @@ class Solution {
         var diagonalSum = 0
         
         for (i, m) in mat.enumerated() {
-            for (j, n) in m.enumerated() {
-                if i == j || m.count - 1 - i == j {
-                    // print("i == \(i), j == \(j)")
+            for (j, n) in m.enumerated() where i == j || m.count - 1 - i == j {
+                // if i == j || m.count - 1 - i == j {
                     diagonalSum += n
-                }
+                // }
             }
         }
         
