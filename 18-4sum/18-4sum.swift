@@ -5,8 +5,8 @@ class Solution {
         var nums = nums
         var result: [[Int]] = []
         
-        for i in 0 ... nums.count - 4 {
-            for j in i + 1 ... nums.count - 3 {
+        for i in 0 ... nums.count - 4 where i == 0 || nums[i] != nums[i-1]  {
+            for j in i + 1 ... nums.count - 3 where j == i + 1 || nums[j] != nums[j-1]  {
                 
                 var output = [nums[i], nums[j]]
                 var targetRemaining = nums[i] + nums[j]
