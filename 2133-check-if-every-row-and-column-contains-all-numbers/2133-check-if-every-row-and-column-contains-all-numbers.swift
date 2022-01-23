@@ -7,8 +7,7 @@ class Solution {
             var col = resetDict
             
             for (c, n) in m.enumerated() {
-                if row[matrix[r][c], default: false] || 
-                    col[matrix[c][r], default: false] 
+                if row[matrix[r][c], default: false] || col[matrix[c][r], default: false] 
                     { return false }
                 
                 row[matrix[r][c]] = true
