@@ -11,9 +11,10 @@ class Solution {
                 var output = [nums[i], nums[j]]
                 var targetRemaining = nums[i] + nums[j]
                 
-                let t = twoSum(Array(nums[j+1 ... nums.count - 1]), 
-                                 output, 
-                                 target - targetRemaining
+                let t = twoSum(
+                                Array(nums[j+1 ... nums.count - 1]), 
+                                output, 
+                                target - targetRemaining
                                 )
                 if t.o {
                     for v in t.0 {
