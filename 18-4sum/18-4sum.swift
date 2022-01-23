@@ -12,9 +12,11 @@ class Solution {
                 var targetRemaining = nums[i] + nums[j]
                 
                 let t = twoSum(
-                                Array(nums[j+1 ... nums.count - 1]), 
+                                nums, 
                                 output, 
-                                target - targetRemaining
+                                target - targetRemaining,
+                                j + 1,
+                                nums.count - 1
                                 )
                 if t.o {
                     for v in t.0 {
@@ -27,17 +29,23 @@ class Solution {
         return Array(Set(result))
     }
     
-    func twoSum(_ nums: [Int], _ result: [Int], _ k: Int) -> ([[Int]], o: Bool) {
+    func twoSum(_ nums: [Int], _ result: [Int], _ k: Int, _ s: Int, _ e: Int) -> ([[Int]], o: Bool) {
         var output = false
         var result: [[Int]] = []
-        var dict = nums.enumerated().reduce(into: [:]) { $0[k - $1.1, default: 0] = $1.0 }
-        nums.enumerated().forEach { 
-            if let val = dict[$0.1], val != $0.0 {
-                result.append([k - $0.1, $0.1])
+        var dict: [Int: Int] = [:]
+        
+        for i in s ... e {
+            dict[k - nums[i]] = i
+        }
+        
+        for i in s ... e {
+            if let val = dict[nums[i]], val != i {
+                result.append([k - nums[i], nums[i]])
                 output = true
             }
         }
-        
+
+        // print(result)
         return (result, output)
     }
 }
