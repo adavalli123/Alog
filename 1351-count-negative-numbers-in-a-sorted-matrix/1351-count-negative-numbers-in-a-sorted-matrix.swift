@@ -3,8 +3,8 @@ class Solution {
         var count = 0
         
         for m in grid {
-            for n in m where n < 0 {
-                count += 1
+            for n in m {
+                if n < 0 { count += 1 }
             }
         }
         
