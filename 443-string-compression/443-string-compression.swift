@@ -22,7 +22,6 @@ class Solution {
             }
         }
         
-        
         chars = Array(chars[0 ..< currIndex])
         return chars.count
     }
