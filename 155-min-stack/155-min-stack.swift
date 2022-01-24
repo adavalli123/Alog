@@ -1,13 +1,15 @@
 
 class MinStack {
-    var arr: [Int] = []
+    var arr: [(Int, Int)] = []
 
-    init() {
-        
-    }
+    init() { }
     
     func push(_ val: Int) {
-        arr.append(val)
+        if arr.isEmpty { 
+            arr.append((val, val))
+        } else {
+            arr.append((val, min(val, arr[arr.count - 1].1)))
+        }
     }
     
     func pop() {
@@ -15,16 +17,11 @@ class MinStack {
     }
     
     func top() -> Int {
-        return arr.last ?? -1
+        return arr.last?.0 ?? -1
     }
     
     func getMin() -> Int {
-        var minimum = Int.max
-        arr.forEach {
-            minimum = min(minimum, $0)
-        }
-        
-        return minimum
+        return arr.last?.1 ?? -1
     }
 }
 
