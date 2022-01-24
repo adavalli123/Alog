@@ -5,11 +5,7 @@ class MinStack {
     init() { }
     
     func push(_ val: Int) {
-        if arr.isEmpty { 
-            arr.append((val, val))
-        } else {
-            arr.append((val, min(val, arr[arr.count - 1].1)))
-        }
+        arr.append((val, min(val, arr.last?.1 ?? Int.max)))
     }
     
     func pop() {
