@@ -1,35 +1,29 @@
 class Solution {
     func compress(_ chars: inout [Character]) -> Int {
-          var str = "", left = 1, right = chars.count, count = 1
+        var left = 0, right = chars.count, currIndex = 0
         
         while left < right {
-            if chars[left - 1] == chars[left] {
-                count += 1
-                left += 1
-                continue
-            }  
+            let char = chars[left]
+            var counter = 0
             
-            if count > 1 {
-                str += String(chars[left-1]) + String(count)
-            } else {
-                str += String(chars[left-1]) 
+            while left < right, chars[left] == char {
+                counter += 1
+                left += 1
             }
-            count = 1
-            left += 1
+            
+            chars[currIndex] = char
+            currIndex += 1
+            
+            if counter > 1 {
+                for ch in Array(String(counter)) {
+                   chars[currIndex] = ch
+                    currIndex += 1
+                }
+            }
         }
         
-        if left - 2 >= 0, chars[left - 2]  == chars[left - 1] {
-            if count > 1 {
-                str += String(chars[left-1]) + String(count)
-            } else {
-                str += String(chars[left-1]) 
-            }
-        } else {
-            str += String(chars[left-1]) 
-        } 
         
-        chars = Array(str)
-        
-        return str.count
+        chars = Array(chars[0 ..< currIndex])
+        return chars.count
     }
 }
