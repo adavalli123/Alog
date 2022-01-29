@@ -72,7 +72,6 @@ class Solution {
                 guard let pop = stack.popLast() else { return -1 }
                 guard stack.isEmpty == false else { break }
                 let distance = current - stack.last! - 1
-                // print((current, pop, stack.last))
                 let boundedHeight = min(height[current], height[stack.last!]) - height[pop]
                 ans += boundedHeight * distance
             }
