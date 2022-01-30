@@ -3,11 +3,9 @@ class Solution {
         var dp = Array<Double>(repeating: 0, count: target+1)
         dp[0] = 1
         
-        for i in dp.indices {
-            for j in nums.indices {
-                if i >= nums[j] {
-                    dp[i] += dp[i - nums[j]]
-                }
+        for i in dp.indices where i > 0 {
+            for j in nums.indices where  i >= nums[j] {
+                dp[i] += dp[i - nums[j]]
             }
         }
         
