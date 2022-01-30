@@ -11,7 +11,6 @@ class Solution {
             } else {
                 dp[row][0] = dp[row-1][0]
             }
-            
         }
         
         for col in obstacleGrid[0].indices where col > 0 {
@@ -20,7 +19,6 @@ class Solution {
             } else {
                 dp[0][col] = dp[0][col-1]
             }
-            
         }
         
         for i in stride(from: 1, to: obstacleGrid.count, by: 1) {
