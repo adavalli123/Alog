@@ -1,15 +1,37 @@
 class Solution {
     func isValidSudoku(_ board: [[Character]]) -> Bool {
-        for i in board.indices {
-            let rows = board[i].filter { $0 != "." }
-            let cols = board.map{ $0[i] }.filter { $0 != "." }
-            let n = (a: 3 * (i / 3), b: 3 * (i % 3))
-            let blks = board[n.a ..< n.a + 3].flatMap{$0[n.b ..< n.b + 3]}.filter{$0 != "."}
-            if rows.count != Set(rows).count ||
-                cols.count != Set(cols).count ||
-                blks.count != Set(blks).count { return false }
-        }
-        return true
+        var board = board
         
+        var row: [Int: [Character]] = [:]
+        var col: [Int: [Character]] = [:]
+        var subMatrix: [Int: [Character]] = [:]
+        
+        for i in 0 ..< board.count {
+            for j in 0 ..< board[i].count where board[i][j] != "." {
+                let character = board[i][j]
+                
+                if row[i]?.contains(character) == true {
+                    return false
+                }
+                
+                row[i, default: []] += [character]
+                
+                if col[j]?.contains(character) == true {
+                    return false
+                }
+                
+                col[j, default: []] += [character]
+                
+                let subMatrixIndex = (i/3)*3 + (j/3)
+                if let values = subMatrix[subMatrixIndex], values.contains(character) {
+                    return false
+                }
+                
+                subMatrix[subMatrixIndex, default: []] += [character]
+            }
+        }
+        
+        // print((row, col, subMatrix))
+        return true
     }
 }
