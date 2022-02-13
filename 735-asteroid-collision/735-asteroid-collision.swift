@@ -7,7 +7,7 @@ class Solution {
                 if stack.last! > abs(asteroid) { continue outerloop }
                 if stack.last == abs(asteroid) { stack.popLast(); continue outerloop }
                 stack.popLast()
-                continue innerloop
+                // continue innerloop
             }
             
             stack.append(asteroid)
