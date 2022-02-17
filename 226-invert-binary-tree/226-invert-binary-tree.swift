@@ -14,11 +14,12 @@
  * }
  */
 class Solution {
+    @discardableResult
     func invertTree(_ root: TreeNode?) -> TreeNode? {
         guard let root = root else { return nil }
         (root.left, root.right) = (root.right, root.left)
-        _ = invertTree(root.left)
-        _ = invertTree(root.right)
+        invertTree(root.left)
+        invertTree(root.right)
         return root
     }
 }
