@@ -15,8 +15,10 @@
  */
 class Solution {
     func invertTree(_ root: TreeNode?) -> TreeNode? {
-        guard let root = root else { return root }
-        (root.left, root.right) = (invertTree(root.right), invertTree(root.left))
+        guard let root = root else { return nil }
+        (root.left, root.right) = (root.right, root.left)
+        _ = invertTree(root.left)
+        _ = invertTree(root.right)
         return root
     }
 }
