@@ -16,25 +16,26 @@
 class Solution {
     func levelOrder(_ root: TreeNode?) -> [[Int]] {
         guard let root = root else { return [] }
-        var queue = [root]
-        var results: [[Int]] = []
+        var q = [root], result: [[Int]] = []
         
-        while !queue.isEmpty {
-            var array: [Int] = []
-            var count = queue.count - 1
-            defer { results.append(array) }
+        while q.isEmpty == false {
+            var output: [Int] = []
+            defer { result += [output] }
             
-            while count >= 0 {
-                defer { count -= 1 }
+            for i in 0 ..< q.count {
+                let pop = q.removeFirst()
+                output += [pop.val]
                 
-                let pop = queue.remove(at: 0)
-                array.append(pop.val)
+                if let left = pop.left {
+                    q.append(left)
+                }
                 
-                if let left = pop.left { queue.append(left) }  
-                if let right = pop.right { queue.append(right) }
+                if let right = pop.right {
+                    q.append(right)
+                }
             }
         }
         
-        return results
+        return result
     }
 }
