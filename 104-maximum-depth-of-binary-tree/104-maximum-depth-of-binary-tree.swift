@@ -14,6 +14,9 @@
  * }
  */
 class Solution {
+    func maxDepth(_ root: TreeNode?) -> Int {
+        return root == nil ? 0 : max(maxDepth(root?.left), maxDepth(root?.right)) + 1
+    }
 //     func maxDepth(_ root: TreeNode?) -> Int {
 //         guard let root = root else { return 0 }
 //         var stack: [(TreeNode, Int)] = [(root, 1)]
@@ -35,27 +38,27 @@ class Solution {
 //         return maximum
 //     }
     
-    func maxDepth(_ root: TreeNode?) -> Int {
-        guard let root = root else { return 0 }
-        var q = [root]
+//     func maxDepth(_ root: TreeNode?) -> Int {
+//         guard let root = root else { return 0 }
+//         var q = [root]
         
-        var maxLevel = 0
+//         var maxLevel = 0
         
-        while q.isEmpty == false {
-            maxLevel += 1
+//         while q.isEmpty == false {
+//             maxLevel += 1
             
-            for i in 0 ..< q.count {
-                let dequeue = q.removeFirst()
-                if let left = dequeue.left {
-                    q.append(left)
-                }
+//             for i in 0 ..< q.count {
+//                 let dequeue = q.removeFirst()
+//                 if let left = dequeue.left {
+//                     q.append(left)
+//                 }
             
-                if let right = dequeue.right {
-                    q.append(right)
-                }
-            }
-        }
+//                 if let right = dequeue.right {
+//                     q.append(right)
+//                 }
+//             }
+//         }
         
-        return maxLevel
-    }
+//         return maxLevel
+//     }
 }
