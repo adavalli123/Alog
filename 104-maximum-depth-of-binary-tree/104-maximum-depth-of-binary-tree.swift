@@ -15,13 +15,23 @@
  */
 class Solution {
     func maxDepth(_ root: TreeNode?) -> Int {
-        return height(root, 0)
-    }
-    
-    func height(_ root: TreeNode?, _ level: Int) -> Int {
-        guard let root = root else { return level }
-        let left = height(root.left, level + 1)
-        let right = height(root.right, level + 1)
-        return max(left, right)
+        guard let root = root else { return 0 }
+        var stack: [(TreeNode, Int)] = [(root, 1)]
+        var maximum = 0
+        
+        while !stack.isEmpty {
+            guard let pop = stack.popLast() else { return 0 }
+            maximum = max(pop.1, maximum)
+            
+            if let left = pop.0.left {
+                stack.append((left, pop.1 + 1))
+            }
+            
+            if let right = pop.0.right {
+                stack.append((right, pop.1 + 1))
+            }
+        }
+        
+        return maximum
     }
 }
