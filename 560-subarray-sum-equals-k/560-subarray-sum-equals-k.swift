@@ -1,19 +1,21 @@
 class Solution {
     func subarraySum(_ nums: [Int], _ k: Int) -> Int {
-        var count = 0, sum = 0, map: [Int: Int] = [0: 1]
+        var count = 0
         
-        for num in nums {
-            sum += num
-            if let val = map[sum - k] {
-                count += val
-            }
+        outerloop: for (index, num) in nums.enumerated() {
+            var sum = 0 
             
-            map[sum] = (map[sum] ?? 0) + 1
+            innerloop: for i in stride(from: index, to: nums.count, by: 1) {
+                sum += nums[i]
+                
+                if sum == k { 
+                    count += 1
+                    // continue outerloop 
+                }
+            }
         }
         
+        // print(subArray)
         return count
     }
 }
-
-// 1 3 4 6 7
-// 1 2 3
