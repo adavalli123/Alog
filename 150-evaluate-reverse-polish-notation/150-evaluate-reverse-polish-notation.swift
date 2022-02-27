@@ -1,31 +1,30 @@
 class Solution {
     func evalRPN(_ tokens: [String]) -> Int {
-        var stack = [Int]()
-        for i in 0..<tokens.count {
-            if let num = Int(tokens[i]) {
-                stack.append(num)
-            } else {
-                let num1 = stack.removeLast()
-                let num2 = stack.removeLast()
-                stack.append(eval(num2, num1, tokens[i]))
-            }    
+        var stack: [Int] = []
+        
+        for token in tokens {
+            if let val = Int(token) {
+                // print(val)
+                stack.append(val)
+                continue
+            }
+            
+            var result = 0
+            var num2 = stack.popLast() ?? 0
+            var num1 = stack.popLast() ?? 0
+            
+            switch token {
+                case "+": result = num1 + num2
+                case "-": result = num1 - num2
+                case "*": result = num1 * num2
+                case "/": result = num1 / num2
+                default: continue
+            }
+            
+            stack.append(result)
         }
         
-        return stack[0]
-    }
-    
-    func eval(_ num1: Int, _ num2: Int, _ op: String) -> Int {
-        switch op {
-            case "+": 
-            return num1 + num2
-            case "-":
-            return num1 - num2
-            case "*":
-            return num1 * num2
-            case "/":
-            return (num1 / num2)//.truncatingRemainder(dividingBy: 1)
-            default: 
-            return 0
-        }
+        // print(stack)
+        return stack.popLast() ?? 0
     }
 }
